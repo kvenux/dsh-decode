@@ -27,7 +27,7 @@ Yes Engineer. GoGo Engineer. **Cognitive surrender, with a job title.**
 
 **Decode** is a [DeepSeek Harness](https://www.npmjs.com/package/@deepseek-ai/dsh) plugin. You ask about your repository in your own words. It answers with text, a diagram, files and code, all linked, and with evidence you can check.
 
-**Keep saying yes. Know what you're saying yes to.**
+**Be the master of your own understanding. Learn your repository from a higher level.**
 
 [![npm](https://img.shields.io/npm/v/dsh-decode/preview?label=npm%40preview)](https://www.npmjs.com/package/dsh-decode)
 ![dsh](https://img.shields.io/badge/dsh-%E2%89%A50.2.1--rc.5-4d6bfe)

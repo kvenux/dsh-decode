@@ -27,7 +27,7 @@ Yes 工程师。GoGo 工程师。**认知投降，有了职位名称。**
 
 **Decode** 是一个 [DeepSeek Harness](https://www.npmjs.com/package/@deepseek-ai/dsh) 插件。你用自己的话问仓库的问题，它用文字、图、文件和代码回答，四者互相联动，并附上可以核对的证据。
 
-**继续说 yes。但要知道你在对什么说 yes。**
+**做自己认知的主人，从更高的层面学习自己的仓库。**
 
 [![npm](https://img.shields.io/npm/v/dsh-decode/preview?label=npm%40preview)](https://www.npmjs.com/package/dsh-decode)
 ![dsh](https://img.shields.io/badge/dsh-%E2%89%A50.2.1--rc.5-4d6bfe)
