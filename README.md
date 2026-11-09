@@ -132,22 +132,6 @@ Osmani's article gives the habits that stop surrender. Decode builds them into t
 
 To be told and to be able to check are two different things. An ordinary answer asks you to trust it or not. Decode gives you where the evidence is, how the parts call each other, and a map. You can check it, find your way, and ask the next question.
 
-## Against the standard mode (measured)
-
-5 questions on the deepseek-harness repository, 5 runs of each, so 25 answers per mode (DeepSeek-V4.1-Flash, reasoning low). A Claude subagent in each run first listed 8 main facts per question from the code, then checked screenshots of both modes against the same list:
-
-| | Decode | dsh standard mode |
-|---|---|---|
-| Correctness (/30) | 27.5 | **28.8** |
-| Main facts stated right (of 200) | 187 | **200** |
-| Main facts not stated | 11 | **0** |
-| Main facts wrong, or text and diagram disagree | 2 | **0** |
-| Severe errors | 3 | 3 |
-| Time per question | 116 s | **61 s** |
-| Tokens per question | 696K | **655K** |
-
-The standard mode scored 1.36 ± 0.61 points higher. Decode's gap is mostly what it leaves out, not what it gets wrong: its answers are shorter. This review does not score how easy an answer is to check or read, and it hardly checks diagram details. Limits: the judges are AI and could tell the two modes apart; the questions were picked to suit Decode, after earlier results were known; the standard mode's 200/200 does not mean its answers are free of errors. The Decode version measured had one more review rule than this release.
-
 ## More
 
 - [Usage details](docs/usage.md): how to read each part of an answer, time and tokens, tools and safety, the web routes, development and the code.
