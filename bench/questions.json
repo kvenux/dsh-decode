@@ -1,0 +1,19 @@
+[
+  {"id":"q1","kind":"explain","q":"这个仓库都有哪些模块？它们之间是什么关系？"},
+  {"id":"q2","kind":"flow","q":"用户发出一条消息后，到模型的回复显示出来，中间经过哪些部分？"},
+  {"id":"q3","kind":"flow","q":"一个插件从安装到生效要经过哪些步骤？"},
+  {"id":"q4","kind":"decision","q":"智能体执行一条命令或修改文件之前，要经过哪些权限检查和审批？"},
+  {"id":"q5","kind":"state","q":"MCP 服务器连接有哪些状态？断线后怎么在这些状态之间切换？"},
+  {"id":"q6","kind":"impact","q":"如果修改会话日志里事件的格式，会影响到哪些部分？"},
+  {"id":"q7","kind":"compare","q":"标准模式、PTC 模式、极简模式、创造模式有什么区别？"},
+  {"id":"q8","kind":"locate","q":"DeepSeek 请求失败后的自动重试是在哪里实现的？"},
+  {"id":"q9","kind":"data","q":"会话日志里的会话、回合、步骤、消息和工具调用之间是什么关系？"},
+  {"id":"q10","kind":"deploy","q":"运行 dsh web 时有哪些进程参与？它们之间怎么通信？"},
+  {"id":"q11","kind":"use","q":"在 dsh web 的插件页里，读者能做哪些事？"},
+  {"id":"e2","kind":"flow","lang":"en","zh":"q2","q":"After a user sends a message, which parts does it pass through before the model's reply shows up on screen?"},
+  {"id":"e4","kind":"decision","lang":"en","zh":"q4","q":"Before the agent runs a command or changes a file, which permission checks and approvals does it go through?"},
+  {"id":"e5","kind":"state","lang":"en","zh":"q5","q":"What states can an MCP server connection be in, and how does it move between them after a disconnect?"},
+  {"id":"e7","kind":"compare","lang":"en","zh":"q7","q":"How do the Standard, PTC, Minimal and Creative modes differ?"},
+  {"id":"e9","kind":"data","lang":"en","zh":"q9","q":"In the session log, how are sessions, turns, steps, messages and tool calls related?"},
+  {"id":"e10","kind":"deploy","lang":"en","zh":"q10","q":"Which processes take part when you run dsh web, and how do they communicate?"}
+]

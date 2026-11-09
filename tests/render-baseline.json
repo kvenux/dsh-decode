@@ -1,0 +1,107 @@
+{
+ "q01": {
+  "overflow": 0,
+  "cut": 0,
+  "midword": 0,
+  "overlap": 0,
+  "hidden": 0
+ },
+ "q02": {
+  "overflow": 0,
+  "cut": 0,
+  "midword": 0,
+  "overlap": 0,
+  "hidden": 0
+ },
+ "q03": {
+  "overflow": 0,
+  "cut": 0,
+  "midword": 0,
+  "overlap": 0,
+  "hidden": 0
+ },
+ "q04": {
+  "overflow": 0,
+  "cut": 0,
+  "midword": 0,
+  "overlap": 0,
+  "hidden": 0
+ },
+ "q05": {
+  "overflow": 0,
+  "cut": 0,
+  "midword": 0,
+  "overlap": 0,
+  "hidden": 0
+ },
+ "q06": {
+  "overflow": 0,
+  "cut": 0,
+  "midword": 0,
+  "overlap": 0,
+  "hidden": 0
+ },
+ "q07": {
+  "overflow": 0,
+  "cut": 0,
+  "midword": 1,
+  "overlap": 0,
+  "hidden": 0
+ },
+ "q08": {
+  "overflow": 0,
+  "cut": 0,
+  "midword": 0,
+  "overlap": 0,
+  "hidden": 0
+ },
+ "q09": {
+  "overflow": 0,
+  "cut": 0,
+  "midword": 0,
+  "overlap": 0,
+  "hidden": 0
+ },
+ "q10": {
+  "overflow": 0,
+  "cut": 0,
+  "midword": 0,
+  "overlap": 0,
+  "hidden": 0
+ },
+ "q11": {
+  "overflow": 0,
+  "cut": 0,
+  "midword": 0,
+  "overlap": 0,
+  "hidden": 0
+ },
+ "e2": {
+  "overflow": 0,
+  "cut": 0,
+  "midword": 0,
+  "overlap": 0,
+  "hidden": 0
+ },
+ "e5": {
+  "overflow": 0,
+  "cut": 0,
+  "midword": 0,
+  "overlap": 0,
+  "hidden": 0
+ },
+ "e9": {
+  "overflow": 0,
+  "cut": 0,
+  "midword": 0,
+  "overlap": 0,
+  "hidden": 0
+ },
+ "e10": {
+  "overflow": 0,
+  "cut": 0,
+  "midword": 0,
+  "overlap": 0,
+  "hidden": 0
+ }
+}

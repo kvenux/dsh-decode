@@ -1,0 +1,37 @@
+[
+ {
+  "id": "d1-flow",
+  "kind": "flow",
+  "q": "When the model issues a tool call, which stages does it pass through until the result gets back to the model?"
+ },
+ {
+  "id": "d2-impact",
+  "kind": "impact",
+  "q": "If the format of the events in the session log changes, which parts of the system are affected?"
+ },
+ {
+  "id": "d3-state",
+  "kind": "state",
+  "q": "What states can an MCP server connection be in, and how does it move between them after a disconnect?"
+ },
+ {
+  "id": "d4-compare",
+  "kind": "compare",
+  "q": "How do the Standard, PTC, Minimal and Creator modes differ?"
+ },
+ {
+  "id": "d5-steps",
+  "kind": "steps",
+  "q": "What steps does a plugin go through from installation until it takes effect?"
+ },
+ {
+  "id": "n1-flow",
+  "kind": "flow",
+  "q": "When a session's context grows too large, which stages does it pass through until compaction finishes and the next model request is sent?"
+ },
+ {
+  "id": "n2-impact",
+  "kind": "impact",
+  "q": "If the interface that a tool must implement changes, which parts of the system are affected?"
+ }
+]

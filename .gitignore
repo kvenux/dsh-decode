@@ -1,0 +1,9 @@
+node_modules/
+# run outputs: answers, screenshots, browser profiles (may hold session tokens)
+bench/out/
+# internal comparison reports: large, with screenshots of private work
+docs/*-compare-*.html
+docs/*-compare-round*.html
+# notes and reports that stay on this machine
+_internal/
+.claude/

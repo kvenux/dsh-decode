@@ -1,0 +1,76 @@
+{
+  "name": "dsh-decode",
+  "version": "0.1.0-preview.1",
+  "description": "Decode: code-repository Q&A for DeepSeek Harness, with cw-uml interactive diagrams, code evidence per paragraph and the files it used. No setup.",
+  "type": "module",
+  "main": "./src/web.js",
+  "exports": {
+    ".": "./src/web.js",
+    "./agent": "./src/agent.js",
+    "./web": "./src/web.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src/*.js",
+    "lib/client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh.md",
+    "docs/usage.md",
+    "docs/usage.zh.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test \"tests/*.test.js\"",
+    "test:render": "node tests/render-audit.mjs",
+    "shots": "node bench/panel-shots.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-tool",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-chat",
+        "@deepseek-ai/dsh-client-ui-sidebar-right"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-llm": ">=0.2.1-rc.5 <0.3.0-0 || >=0.2.2-0 <0.3.0-0",
+    "@deepseek-ai/dsh-tools": ">=0.2.1-rc.5 <0.3.0-0 || >=0.2.2-0 <0.3.0-0"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "dsh-plugin",
+    "code-understanding",
+    "codebase-qa",
+    "code-diagram"
+  ],
+  "author": "Keven Sun",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kvenux/dsh-decode.git"
+  },
+  "homepage": "https://github.com/kvenux/dsh-decode#readme",
+  "bugs": {
+    "url": "https://github.com/kvenux/dsh-decode/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.9.0"
+  },
+  "publishConfig": {
+    "tag": "preview"
+  }
+}

@@ -1,0 +1,42 @@
+# Decode: a Q&A mode in the mode menu, plus the inventory route for the repository map. The model reads, searches
+# and may run commands (the shell of the platform); the file write and edit tools are left out: answering needs none.
+- insert:
+    - id: decode-web
+      name: 'dsh-decode'
+    - id: preset-decode
+      name: '@deepseek-ai/dsh-agent-preset'
+      config:
+        id: decode
+        name: Decode
+        description: Ask about the repository; answers come with interactive diagrams, code evidence and the files used. 对仓库提问，回答带交互图、代码证据和用到的文件。
+        order: 2
+        plugins:
+          - id: persona
+            name: '@deepseek-ai/dsh-persona'
+            config:
+              prefix: >-
+                You answer questions about this code repository for readers who may not write code. You are powered by the {{model}} model.
+          # the workspace's AGENTS.md (and similar instruction files), as the standard mode loads them
+          - id: agent-instructions
+            name: '@deepseek-ai/dsh-agent-instructions'
+            config:
+              maxBytes: 65536
+          - id: time-context
+            name: '@deepseek-ai/dsh-time-context'
+          - id: tool-bash
+            name: '@deepseek-ai/dsh-tool-bash'
+            disabled: !!js process.platform === 'win32'
+          - id: tool-pwsh
+            name: '@deepseek-ai/dsh-tool-pwsh'
+            disabled: !!js process.platform !== 'win32'
+          - id: tool-fs
+            name: '@deepseek-ai/dsh-tool-fs'
+            config:
+              write: false
+              edit: false
+          - id: tool-fs-search
+            name: '@deepseek-ai/dsh-tool-fs-search'
+            config:
+              sampleOverCapGlobResults: false
+          - id: decode
+            name: 'dsh-decode/agent'

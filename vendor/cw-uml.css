@@ -1,0 +1,323 @@
+/* Copyright (c) 2026 Keven Sun. MIT License. */
+/* cw-uml: colours come from the host page's tokens when it has them */
+.cu{--cu-ink:var(--ink,#1b1f24);--cu-muted:var(--muted,#6b7280);--cu-line:var(--line,#d0d5dc);--cu-surface:var(--surface,#fff);--cu-bg:var(--bg,#f6f7f9);--cu-accent:var(--accent,#1f5fa8);--cu-accent-soft:var(--accent-soft,#e3edf8);--cu-danger:var(--danger,#b42318);
+  --cu-weak:var(--uml-weak,color-mix(in srgb,var(--cu-ink) 42%,var(--cu-bg)));--cu-ghost:var(--uml-ghost,color-mix(in srgb,var(--cu-ink) 20%,var(--cu-bg)));--cu-guide:var(--uml-guide,color-mix(in srgb,var(--cu-ink) 18%,var(--cu-bg)));
+  display:block;font-family:inherit;overflow:visible}
+.cu text{font-size:12px;fill:var(--cu-muted);text-anchor:middle;dominant-baseline:middle;pointer-events:none}
+.cu marker path{fill:context-stroke}
+.cu marker path.cu-open{fill:none;stroke:context-stroke;stroke-width:1.4}
+.cu marker path.cu-tri{fill:var(--cu-surface);stroke:context-stroke;stroke-width:1.3}
+.cu-cls .cu-cname{font-weight:700;fill:var(--cu-ink)}.cu-cls .cu-csep{stroke:var(--cu-line)}
+.cu-node.cu-cls .cu-field rect{fill:transparent;stroke:none}.cu-node.cu-cls .cu-field text{font-size:10.5px;text-anchor:start;fill:var(--cu-ink);font-weight:400}
+.cu-node.cu-cls .cu-field.cu-now rect{fill:var(--cu-accent-soft)}.cu-node.cu-cls .cu-field.cu-now text{font-weight:700}
+.cu-r-ref .cu-line{stroke-dasharray:5 3}
+.cu [data-id]{cursor:pointer;outline:none}
+.cu [data-id]:focus-visible rect,.cu [data-id]:focus-visible ellipse{stroke:var(--cu-accent);stroke-width:2.5}
+.cu-token{fill:var(--cu-accent);opacity:0;pointer-events:none}
+.cu-token.on{opacity:1}
+@keyframes cu-draw{to{stroke-dashoffset:0}}
+@keyframes cu-march{to{stroke-dashoffset:-20}}
+@keyframes cu-pulse{50%{opacity:.45}}
+@keyframes cu-glow{0%{filter:drop-shadow(0 0 0 var(--cu-accent))}35%{filter:drop-shadow(0 0 7px var(--cu-accent))}100%{filter:drop-shadow(0 0 0 transparent)}}
+/* an element that just became current glows once; one the host points at (a name under the pointer in the text) is ringed */
+.cu-flash{animation:cu-glow 1s ease-out 1}
+.cu-hover rect,.cu-hover ellipse,.cu-hover .cu-diamond,.cu-hover .cu-paper{stroke:var(--cu-accent)!important;stroke-width:3!important;stroke-dasharray:none!important}
+.cu-hover .cu-arrow,.cu-hover .cu-line{stroke:var(--cu-accent)!important;stroke-width:3!important}
+.cu-hover text{fill:var(--cu-ink)!important;font-weight:700}
+tr.cu-hover{outline:2px solid var(--cu-accent);outline-offset:-2px}
+
+/* boxes shared by most views */
+.cu-node rect,.cu-node ellipse,.cu-node .cu-diamond{fill:var(--cu-surface);stroke:color-mix(in srgb,var(--cu-c,var(--cu-muted)) 45%,var(--cu-line));stroke-width:1.2;transition:fill .3s,stroke .3s,stroke-width .3s,opacity .3s}
+.cu-node.cu-k-external rect{stroke-dasharray:4 3}
+.cu-node.cu-lit rect,.cu-node.cu-lit ellipse,.cu-node.cu-lit .cu-diamond{fill:color-mix(in srgb,var(--cu-c,var(--cu-accent)) 12%,var(--cu-surface));stroke:var(--cu-c,var(--cu-accent))}
+.cu-node.cu-lit text{fill:var(--cu-ink)}
+.cu-node.cu-now rect,.cu-node.cu-now ellipse,.cu-node.cu-now .cu-diamond{fill:color-mix(in srgb,var(--cu-c,var(--cu-accent)) 30%,var(--cu-surface));stroke:var(--cu-c,var(--cu-accent));stroke-width:2.4}
+.cu-node.cu-now text{font-weight:700;fill:var(--cu-ink)}
+.cu-node:hover rect,.cu-node:hover ellipse{stroke-width:2}
+.cu-picked rect,.cu-picked ellipse,.cu-picked .cu-diamond{stroke:var(--cu-accent)!important;stroke-width:3!important}
+.cu-badge{font-size:10.5px!important;fill:var(--cu-danger)!important;text-anchor:end!important;font-weight:700}
+.cu-dot{fill:var(--cu-ink)}
+.cu-ring{fill:none;stroke:var(--cu-ink);stroke-width:1.4}
+/* a start or end point the text names */
+.cu-node.cu-now .cu-dot{fill:var(--cu-accent)}.cu-node.cu-now .cu-ring{stroke:var(--cu-accent);stroke-width:2.4}
+
+/* edges: polylines of horizontal and vertical segments (or one straight segment) */
+.cu-edge .cu-line{fill:none;stroke:var(--cu-muted);stroke-width:1.3;stroke-linejoin:miter;transition:stroke .3s,opacity .3s}
+.cu-edge .cu-hitp{fill:none;stroke:transparent;stroke-width:12}
+.cu-edge:not([data-id]) .cu-hitp{display:none}
+.cu-elabel rect{fill:var(--cu-bg);stroke:none}
+.cu-elabel text{font-size:10.5px;fill:var(--cu-ink)}
+.cu-edge.cu-lit .cu-line{stroke:var(--cu-accent);stroke-width:2}
+.cu-edge.cu-now .cu-line{stroke:var(--cu-accent);stroke-width:2.6}
+.cu-elabel{cursor:pointer;transition:opacity .3s}
+.cu-elabel.cu-now rect{fill:var(--cu-accent-soft);stroke:var(--cu-accent)}
+.cu-elabel.cu-now text,.cu-elabel.cu-lit text{font-weight:700}
+.cu-elabel.cu-off{opacity:.35}
+.cu-edge.cu-off{opacity:.3}
+.cu-edge.cu-picked .cu-line{stroke:var(--cu-ink);stroke-width:2.4}
+/* a picked node's neighbourhood: its edges and the nodes at their other ends; the rest fades */
+.cu-edge.cu-nbe .cu-line{stroke:var(--cu-accent);stroke-width:2.4}
+.cu-elabel.cu-nbe text{font-weight:700}
+.cu-node.cu-nb rect,.cu-node.cu-nb ellipse,.cu-node.cu-nb .cu-diamond,.cu-node.cu-nb circle{stroke:var(--cu-accent);stroke-width:2}
+.cu-dim{opacity:.28;transition:opacity .15s}
+.cu-edge[data-id]:hover .cu-line{stroke-width:2.2}
+.cu-edge.cu-enter .cu-line{stroke-dasharray:600;stroke-dashoffset:600;animation:cu-draw .5s ease forwards}
+
+/* sequence */
+.cu-life rect{fill:var(--cu-surface);stroke:color-mix(in srgb,var(--cu-c,var(--cu-muted)) 45%,var(--cu-line));stroke-width:1.2;transition:fill .3s,stroke .3s}
+.cu-life.cu-k-external rect{stroke-dasharray:4 3}
+.cu-lifeline{stroke:var(--cu-guide);stroke-width:1.2;stroke-dasharray:3 4}
+.cu-life.cu-active rect{stroke:var(--cu-c,var(--cu-muted))}
+.cu-life.cu-active text{fill:var(--cu-ink)}
+.cu-life.cu-now rect{fill:color-mix(in srgb,var(--cu-c,var(--cu-accent)) 22%,var(--cu-surface));stroke:var(--cu-c,var(--cu-accent));stroke-width:2.2}
+.cu-life.cu-now text{font-weight:700}
+.cu-life.cu-now .cu-lifeline{stroke:var(--cu-c,var(--cu-accent));stroke-dasharray:none;opacity:.5}
+.cu-msg .cu-hit{stroke:transparent;stroke-width:14}
+.cu-msg .cu-arrow{stroke:var(--cu-weak);stroke-width:1.4;transition:stroke .3s,opacity .3s}
+.cu-msg path.cu-arrow{fill:none}
+.cu-msg.cu-m-return .cu-arrow{stroke-dasharray:5 4}
+.cu-msg.cu-m-async .cu-arrow{stroke-dasharray:1 3}
+.cu-msg{transition:opacity .3s}
+.cu-msg.cu-future .cu-arrow,.cu-msg.cu-skip .cu-arrow{stroke:var(--cu-ghost)}
+.cu-msg.cu-future .cu-num{opacity:.55}
+.cu-msg.cu-skip{opacity:.45}
+.cu-msg.cu-skip .cu-label,.cu-msg.cu-skip .cu-slabel{display:none}
+/* messages not reached yet keep their text, faint: a diagram of bare arrows reads as broken (RepoCompass review 2026-11-06) */
+.cu-msg.cu-future .cu-label,.cu-msg.cu-future .cu-slabel{opacity:.55}
+.cu-msg .cu-label rect,.cu-msg .cu-slabel rect{fill:var(--cu-bg);stroke:none}
+.cu-msg .cu-slabel text{font-size:11px;fill:var(--cu-ink)}
+/* every message shows its text (RepoCompass review 2026-11-06: text cut to the span hid the flow the reader had passed;
+   one message per row, so a label wider than its arrow covers no other label). A message to itself has its text right
+   of its loop; its number only where no text fits there. */
+.cu-msg .cu-label text{font-size:11px;fill:var(--cu-ink)}
+.cu-msg .cu-num circle{fill:var(--cu-surface);stroke:var(--cu-line)}
+.cu-msg .cu-num text{font-size:9.5px;font-weight:700}
+.cu-msg:not(.cu-self) .cu-num,.cu-msg.cu-short .cu-num{display:none}
+.cu-msg.cu-self .cu-label,.cu-msg .cu-slabel{display:none}.cu-msg.cu-short:not(.cu-skip) .cu-slabel{display:inline}
+.cu-msg.cu-now .cu-slabel rect{fill:var(--cu-accent-soft);stroke:var(--cu-accent)}.cu-msg.cu-now .cu-slabel text{font-weight:700}
+.cu-msg.cu-now .cu-arrow{stroke:var(--cu-accent);stroke-width:2.4}
+.cu-msg.cu-now .cu-label rect{fill:var(--cu-accent-soft);stroke:var(--cu-accent)}
+.cu-msg.cu-now .cu-label text{font-weight:700}
+.cu-msg.cu-enter .cu-arrow{stroke-dasharray:400;stroke-dashoffset:400;animation:cu-draw .42s ease forwards}
+.cu-msg.cu-picked .cu-arrow{stroke:var(--cu-ink);stroke-width:2.4}
+.cu-msg:hover .cu-arrow{stroke-width:2.4}
+.cu-frag .cu-fbox{fill:none;stroke:var(--cu-muted);stroke-width:1.2}
+.cu-frag .cu-fragtag{fill:var(--cu-surface);stroke:var(--cu-muted)}
+.cu-frag .cu-sep{stroke:var(--cu-muted);stroke-width:1.2;stroke-dasharray:6 4}
+.cu-frag text{text-anchor:start;font-size:11px;fill:var(--cu-ink)}
+.cu-frag .cu-ftag{font-weight:700}
+.cu-frag.cu-now .cu-fbox{stroke:var(--cu-accent);stroke-width:2;stroke-dasharray:6 4;animation:cu-march 1s linear infinite}
+.cu-frag.cu-now .cu-ftag{fill:var(--cu-accent)}
+.cu-guard.cu-chosen{fill:var(--cu-accent);font-weight:700}
+.cu-guard.cu-out{opacity:.45;text-decoration:line-through}
+
+/* communication */
+.cu-link line{stroke:var(--cu-line);stroke-width:1.3;transition:stroke .3s}
+.cu-link.cu-lit line{stroke:var(--cu-muted)}
+.cu-link.cu-now line{stroke:var(--cu-accent);stroke-width:2.4}
+.cu-cm rect{fill:var(--cu-bg);stroke:none}
+.cu-cm text{font-size:10.5px;fill:var(--cu-ink)}
+.cu-cm.cu-now rect{fill:var(--cu-accent-soft);stroke:var(--cu-accent)}
+.cu-cm.cu-now text{font-weight:700}
+.cu-cm.cu-picked rect{stroke:var(--cu-ink)}
+
+/* component */
+.cu-dep .cu-line{stroke:var(--cu-muted)}
+.cu-dep.cu-hide{opacity:0}
+.cu-dep.cu-on .cu-line{stroke:var(--cu-accent);stroke-width:1.8;stroke-dasharray:6 4;animation:cu-march 1.2s linear infinite}
+
+/* package */
+.cu-pkg .cu-tab{fill:var(--cu-surface);stroke:color-mix(in srgb,var(--cu-c,var(--cu-muted)) 45%,var(--cu-line));stroke-width:1.2}
+.cu-pkg .cu-pname,.cu-dnode .cu-pname{text-anchor:start;font-weight:700;fill:var(--cu-ink)}
+.cu-kid rect,.cu-art rect{fill:var(--cu-bg);stroke:var(--cu-line);stroke-width:1}
+.cu-kid text,.cu-art text{font-size:10.5px}
+.cu-kid.cu-now rect,.cu-art.cu-now rect{fill:var(--cu-accent-soft);stroke:var(--cu-accent)}
+.cu-kid.cu-lit rect,.cu-art.cu-lit rect{stroke:var(--cu-accent)}
+.cu-use .cu-line{stroke-dasharray:5 3}
+.cu-rev .cu-line{stroke:var(--cu-danger);stroke-width:1.6}
+
+/* state machine and activity */
+.cu-act.cu-off{opacity:.38}
+.cu-act.cu-blocked rect,.cu-act.cu-blocked .cu-diamond{fill:color-mix(in srgb,var(--cu-danger) 16%,var(--cu-surface))!important;stroke:var(--cu-danger)!important;stroke-width:2.6!important}
+.cu-act.cu-blocked text{fill:var(--cu-danger);font-weight:700}
+.cu-act.cu-k-ref rect{stroke-width:1.6}
+.cu-act.cu-k-ref .cu-fragtag{fill:var(--cu-surface);stroke:var(--cu-line)}
+.cu-act .cu-ftag{text-anchor:start;font-size:9.5px;font-weight:700}
+.cu-act .cu-dname{text-anchor:start;font-size:10.5px}
+.cu-bar{fill:var(--cu-ink)!important;stroke:none!important}
+.cu-lane rect{fill:none;stroke:var(--cu-line);stroke-width:1}
+.cu-lane text{font-size:11px;font-weight:700}
+.cu-state.cu-now rect{animation:cu-pulse 1.6s ease-in-out 1}
+
+/* use case */
+.cu-system rect{fill:none;stroke:var(--cu-line);stroke-width:1.2}
+.cu-sysname,.cu-ghead{text-anchor:start!important;font-weight:700}
+.cu-ghead{font-size:10.5px!important;text-anchor:middle!important}
+.cu-stereo{text-anchor:start!important}
+.cu-ghead,.cu-stereo{paint-order:stroke;stroke:var(--cu-bg);stroke-width:4px;stroke-linejoin:round}
+.cu-actor circle,.cu-actor path{fill:none;stroke:var(--cu-ink);stroke-width:1.4}
+.cu-actor text{fill:var(--cu-ink);font-size:11px}
+.cu-actor.cu-now circle,.cu-actor.cu-now path{stroke:var(--cu-accent);stroke-width:2.2}
+.cu-case text{font-size:12px}
+.cu-assoc{fill:none;stroke:color-mix(in srgb,var(--cu-muted) 75%,transparent);stroke-width:1.2;stroke-linecap:round;transition:stroke .2s,stroke-width .2s}
+.cu-assoc.cu-on{stroke:var(--cu-accent);stroke-width:2.2}
+.cu-inc path{fill:none;stroke:var(--cu-muted);stroke-width:1.2;stroke-dasharray:5 3}
+.cu-inc text{font-size:10px}
+.cu-inc.cu-on path{stroke:var(--cu-accent)}
+
+/* deployment */
+.cu-dnode .cu-face{fill:color-mix(in srgb,var(--cu-line) 50%,var(--cu-surface));stroke:var(--cu-line);stroke-width:1}
+.cu-dnode.cu-k-cloud rect{rx:10}
+.cu-dlink line,.cu-dlink path{stroke:var(--cu-muted);stroke-width:1.3;fill:none}
+.cu-dlink.cu-on line,.cu-dlink.cu-on path{stroke:var(--cu-accent);stroke-width:2.2}
+
+/* timing */
+.cu-trow{fill:none!important;stroke:none!important}
+.cu-tl:nth-child(even) .cu-trow{fill:color-mix(in srgb,var(--cu-bg) 60%,transparent)!important}
+.cu-tname{text-anchor:start!important;font-weight:700;fill:var(--cu-ink)!important}
+.cu-tstate{text-anchor:end!important;font-size:10px!important}
+.cu-tstate.cu-now{fill:var(--cu-accent)!important;font-weight:700}
+.cu-wave{fill:none;stroke:var(--cu-c,var(--cu-accent));stroke-width:1.8;stroke-linejoin:miter}
+.cu-tl.cu-now .cu-wave{stroke-width:2.8}
+.cu-mark line{stroke:var(--cu-line);stroke-dasharray:3 3}
+.cu-mark text{font-size:10px}
+.cu-axis line{stroke:var(--cu-line)}
+.cu-axis text{font-size:10px}
+.cu-cursor{stroke:var(--cu-accent);stroke-width:1.6;opacity:0;transition:opacity .2s}
+.cu-cursor.on{opacity:1}
+
+/* constraint notes */
+.cu-note .cu-paper{fill:color-mix(in srgb,#f5c542 16%,var(--cu-surface));stroke:color-mix(in srgb,#c89411 50%,var(--cu-line));stroke-width:1}
+.cu-note .cu-fold{fill:none;stroke:color-mix(in srgb,#c89411 50%,var(--cu-line))}
+.cu-note text{text-anchor:start;font-size:10.5px;fill:var(--cu-ink)}
+.cu-note .cu-anchor{fill:none;stroke:color-mix(in srgb,#c89411 50%,var(--cu-line));stroke-width:1;stroke-dasharray:3 3;opacity:.6}
+.cu-note.cu-now .cu-paper{stroke:#c89411;stroke-width:2}
+.cu-note.cu-now .cu-anchor{opacity:1;stroke-width:1.6}
+.cu-note.cu-picked .cu-paper{stroke:var(--cu-accent);stroke-width:2.4}
+
+/* decision table */
+/* decision table: "if these conditions, then these results"; a card with the two groups labelled and an arrow between */
+.cu-table{overflow-x:auto}
+.cu-table table{border-collapse:separate;border-spacing:0;font-size:12.5px;line-height:1.45;width:100%;color:var(--cu-ink);background:var(--cu-surface);border:1px solid var(--cu-line);border-radius:10px;overflow:hidden}
+.cu-table th,.cu-table td{padding:7px 10px;text-align:left;vertical-align:top;border-bottom:1px solid color-mix(in srgb,var(--cu-line) 70%,transparent)}
+.cu-table tbody tr:last-child td{border-bottom:none}
+.cu-table thead th{font-size:11.5px;font-weight:600;color:var(--cu-muted);background:color-mix(in srgb,var(--cu-ink) 3%,var(--cu-surface));border-bottom:1px solid var(--cu-line)}
+.cu-table thead .cu-tgroup th{font-size:10.5px;font-weight:700;letter-spacing:.06em;padding:6px 10px 0;border-bottom:none}
+.cu-table thead .cu-tgroup th.cu-res{color:var(--cu-accent)}
+.cu-table thead th.cu-res{background:color-mix(in srgb,var(--cu-accent) 7%,var(--cu-surface))}
+.cu-table th.cu-arrow,.cu-table td.cu-arrow{width:16px;padding-left:0;padding-right:0;text-align:center;color:var(--cu-muted)}
+.cu-table td.cu-arrow{font-weight:700}
+.cu-table .cu-val{display:inline-block;padding:1px 9px;border-radius:11px;font-weight:600;background:color-mix(in srgb,var(--cu-ink) 6%,var(--cu-surface));border:1px solid var(--cu-line);transition:background .25s,border-color .25s,color .25s}
+.cu-table .cu-val.cu-short{white-space:nowrap}
+.cu-table td.cu-any{color:var(--cu-muted);font-style:italic}
+.cu-table td.cu-then{background:color-mix(in srgb,var(--cu-accent) 3%,var(--cu-surface))}
+.cu-table td.cu-same{color:var(--cu-muted)}
+.cu-table tbody tr{cursor:pointer;transition:opacity .25s}
+.cu-table tbody tr td{transition:background .25s,box-shadow .25s}
+.cu-table tbody tr:hover td{background:color-mix(in srgb,var(--cu-accent) 6%,var(--cu-surface))}
+.cu-table tbody tr.cu-off{opacity:.3}
+.cu-table tbody tr.cu-now td{background:var(--cu-accent-soft)}
+.cu-table tbody tr.cu-now td:first-child{box-shadow:inset 3px 0 0 var(--cu-accent)}
+.cu-table tbody tr.cu-now td.cu-then{color:var(--cu-ink);font-weight:600}
+.cu-table tbody tr.cu-now .cu-val{background:var(--cu-accent);border-color:var(--cu-accent);color:var(--cu-surface)}
+.cu-table tbody tr.cu-picked td{box-shadow:inset 0 2px 0 var(--cu-accent),inset 0 -2px 0 var(--cu-accent)}
+.cu-tfilters{display:flex;flex-direction:column;gap:6px;margin:0 0 8px}
+.cu-tfilter{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:11.5px;color:var(--cu-muted)}
+.cu-tfilter span{margin-right:4px;font-weight:600}
+.cu-tfilter button{font:inherit;font-size:11.5px;color:var(--cu-ink);background:var(--cu-surface);border:1px solid var(--cu-line);border-radius:12px;padding:1px 10px;cursor:pointer;transition:background .15s,border-color .15s}
+.cu-tfilter button:hover{border-color:var(--cu-accent)}
+.cu-tfilter button.on{background:var(--cu-accent);border-color:var(--cu-accent);color:var(--cu-surface)}
+
+/* board */
+.cu-board{display:flex;flex-direction:column;gap:8px;min-height:0}
+.cu-tabs{display:flex;flex-wrap:wrap;gap:4px}
+.cu-tabs button{border:1px solid var(--line,#d0d5dc);background:none;border-radius:999px;padding:2px 12px;font:inherit;font-size:13px;color:var(--muted,#6b7280);cursor:pointer}
+.cu-tabs button[aria-selected="true"]{background:var(--accent-soft,#e3edf8);border-color:var(--accent,#1f5fa8);color:var(--accent,#1f5fa8);font-weight:700}
+.cu-pane{min-height:0;overflow:auto}
+.cu-pin{position:sticky;top:0;z-index:2;height:0;overflow:visible}.cu-pin svg{display:block}.cu-pinbg{fill:var(--cu-bg)}
+@media (prefers-reduced-motion:reduce){.cu *{animation:none!important;transition:none!important}}
+.cu-band rect{fill:color-mix(in srgb,var(--cu-muted) 6%,transparent);stroke:color-mix(in srgb,var(--cu-muted) 22%,transparent);stroke-dasharray:4 3}
+.cu-band text{font-size:11px;fill:var(--cu-muted);letter-spacing:.06em;dominant-baseline:middle;text-anchor:start}
+.cu-band .cu-bandlab{fill:var(--cu-bg);stroke:color-mix(in srgb,var(--cu-muted) 22%,transparent);stroke-dasharray:none}
+.cu-node.cu-k-ctx{opacity:.5;transition:opacity .15s}
+.cu-node.cu-k-ctx.cu-now,.cu-node.cu-k-ctx.cu-lit,.cu-node.cu-k-ctx.cu-picked,.cu-node.cu-k-ctx.cu-nb,.cu-node.cu-k-ctx:hover{opacity:1}
+
+/* a route over the component map (spec.trail) */
+.cu-tr .cu-trl{fill:none;stroke:var(--cu-accent);stroke-width:1.6;opacity:.55}
+.cu-tr .cu-trn{fill:var(--cu-bg,#fff);stroke:var(--cu-accent);stroke-width:1.2}
+.cu-tr text{font-size:9.5px;text-anchor:middle;fill:var(--cu-accent);font-weight:600;pointer-events:none}
+.cu-tr-next{opacity:.28}.cu-tr-next .cu-trl{stroke-dasharray:4 4}
+.cu-tr-done .cu-trl{opacity:.75}
+.cu-tr-now .cu-trl{opacity:1;stroke-width:2.6;stroke-dasharray:7 5;animation:cu-march .7s linear infinite}
+.cu-tr-now .cu-trn{fill:var(--cu-accent)}.cu-tr-now text{fill:#fff}
+.cu-comp .cu-node.cu-off{opacity:.3;transition:opacity .2s}
+
+/* grids: story map, service blueprint, matrix */
+.cu-grid text{font-size:11px;fill:var(--cu-ink);text-anchor:middle;dominant-baseline:auto}
+.cu-grid .cu-off{opacity:.28;transition:opacity .2s}
+.cu-grid .cu-node{cursor:pointer}
+.cu-smk rect{fill:var(--cu-bg);stroke:none}.cu-smk text{text-anchor:start;font-weight:700;fill:var(--cu-muted);letter-spacing:.04em}
+.cu-smk.cu-now rect,.cu-smk.cu-lit rect{fill:var(--cu-accent-soft)}
+.cu-smc rect{fill:var(--cu-accent-soft);stroke:color-mix(in srgb,var(--cu-accent) 40%,var(--cu-line))}.cu-smc text{font-weight:600}
+.cu-smp.cu-bad rect{stroke:var(--cu-danger);stroke-dasharray:4 3}
+.cu-smar{stroke:var(--cu-muted);stroke-width:1.2;fill:none}
+.cu-bpcol{fill:transparent;transition:fill .2s}.cu-bpcol.cu-now{fill:color-mix(in srgb,var(--cu-accent-soft) 70%,transparent)}
+.cu-bph rect{fill:var(--cu-bg)}.cu-bph text{font-weight:600}
+.cu-bpln{fill:var(--cu-muted) !important;font-size:10.5px}
+.cu-bpsep{stroke:var(--cu-line);stroke-width:.8}
+.cu-bpvis{stroke:var(--cu-accent);stroke-width:1.4;stroke-dasharray:6 4}.cu-bpvl{text-anchor:end !important;fill:var(--cu-accent) !important;font-size:10px}
+.cu-bpm rect{fill:var(--cu-surface)}
+.cu-bpt text{text-anchor:start;font-size:10.5px;fill:var(--cu-ink2,var(--cu-ink))}.cu-bpt.cu-bad text{fill:var(--cu-danger)}
+.cu-mx text{font-size:10.5px}
+.cu-mxh rect{fill:transparent;stroke:none}.cu-mxh text{text-anchor:start}.cu-mxh.cu-now rect,.cu-mxh.cu-lit rect{fill:var(--cu-accent-soft)}
+.cu-mxr rect{fill:transparent;stroke:none}.cu-mxr text{text-anchor:start}.cu-mxr.cu-now rect,.cu-mxr.cu-lit rect{fill:var(--cu-accent-soft)}
+.cu-mxr:hover rect{fill:var(--cu-bg)}
+.cu-mxh.cu-flat text{text-anchor:middle;fill:var(--cu-ink)}.cu-mx .cu-mxr text{fill:var(--cu-ink)}
+.cu-mxcol{fill:transparent;stroke:var(--cu-line);stroke-width:.4}.cu-mxcol.cu-now{fill:color-mix(in srgb,var(--cu-accent-soft) 60%,transparent)}
+.cu-mxc rect{fill:color-mix(in srgb,var(--cu-accent) 22%,var(--cu-surface))}.cu-mxc text{fill:var(--cu-accent);font-weight:700}
+.cu-mxc.cu-now rect,.cu-mxc.cu-lit rect{fill:var(--cu-accent)}.cu-mxc.cu-now text,.cu-mxc.cu-lit text{fill:#fff}
+.cu-mxc{cursor:pointer}
+
+/* trace */
+.cu-trace text{text-anchor:start;font-size:11px}
+.cu-trh{font-weight:700;fill:var(--cu-muted,#6b7280)}.cu-trk{font-weight:700;font-size:11.5px}
+.cu-trc text{fill:var(--cu-muted,#6b7280);font-size:10.5px}.cu-trc.cu-lit text,.cu-trc.cu-now text{fill:var(--cu-ink);font-weight:700}
+.cu-trs rect{fill:var(--cu-surface,#fff);stroke:var(--cu-line)}
+.cu-trm rect{fill:var(--cu-surface,#fff);stroke:var(--cu-c,var(--cu-line));stroke-width:1.3}.cu-trm.cu-alone rect{stroke-dasharray:3 2}
+.cu-trr rect{fill:var(--cu-surface,#fff);stroke:var(--cu-c,var(--cu-line));stroke-width:1.6}.cu-trr text{font-weight:600}
+.cu-trl{fill:none;stroke:var(--cu-line);transition:opacity .15s,stroke .15s}.cu-trl.cu-on{stroke:var(--cu-accent)}.cu-trl.cu-off{opacity:.12}
+.cu-trace .cu-now rect,.cu-trace .cu-lit rect{stroke:var(--cu-accent);stroke-width:2}.cu-trace .cu-now rect{fill:var(--cu-accent-soft)}.cu-trace .cu-now text,.cu-trace .cu-lit text{font-weight:700}
+
+/* deployment, nested */
+.cu-dep-n .cu-dnode rect{fill:var(--cu-surface);stroke:var(--cu-line);stroke-width:1.2}
+.cu-dep-n .cu-dnode.cu-k-env rect{fill:color-mix(in srgb,var(--cu-bg) 70%,var(--cu-surface));stroke-dasharray:none}
+.cu-dep-n .cu-dnode.cu-k-external rect{stroke-dasharray:4 3}
+.cu-dep-n .cu-stereo{font-size:9.5px;fill:var(--cu-muted)}
+.cu-dep-n .cu-pname{font-size:11.5px}
+.cu-dep-n .cu-lname{font-size:11.5px;font-weight:700;fill:var(--cu-ink);text-anchor:middle}.cu-dep-n .cu-dnode.cu-now>.cu-lname{fill:var(--cu-accent)}
+.cu-dep-n .cu-art rect,.cu-dep-n .cu-art path{fill:var(--cu-surface);stroke:var(--cu-line)}
+.cu-dep-n .cu-art .cu-doc{fill:none}
+.cu-dep-n .cu-art text{font-size:10.5px;text-anchor:middle}
+.cu-dep-n .cu-dnode.cu-now>rect,.cu-dep-n .cu-art.cu-now rect,.cu-dep-n .cu-art.cu-now path{stroke:var(--cu-accent);stroke-width:2.4;fill:var(--cu-accent-soft)}
+.cu-dep-n .cu-dnode.cu-now>.cu-pname,.cu-dep-n .cu-art.cu-now text{fill:var(--cu-accent);font-weight:700}
+.cu-dep-n .cu-dnode.cu-lit>rect{stroke:var(--cu-accent);stroke-width:1.6}
+.cu-dep-n rect,.cu-dep-n path{transition:stroke .15s,fill .15s}
+.cu-dep-n .cu-elabel{opacity:0;pointer-events:none;transition:opacity .15s}
+.cu-dep-n .cu-dlink.cu-say .cu-elabel,.cu-dep-n .cu-dlink:hover .cu-elabel{opacity:1}
+.cu-dep-n .cu-dlink.cu-say .cu-elabel.cu-noroom{opacity:0}.cu-dep-n .cu-dlink:hover .cu-elabel.cu-noroom{opacity:1}
+.cu-dep-n .cu-dlink path.cu-hit{stroke:transparent;stroke-width:9;pointer-events:stroke}
+.cu-dep-n .cu-dlink path:not(.cu-hit){stroke:color-mix(in srgb,var(--cu-muted) 60%,transparent);stroke-width:1.1}
+.cu-dep-n .cu-dlink.cu-on path:not(.cu-hit){stroke:var(--cu-accent);stroke-width:2.2}
+.cu-dep-n .cu-dlink:hover path:not(.cu-hit){stroke:var(--cu-accent)}
+.cu-dep-n .cu-elabel rect{fill:var(--cu-surface);stroke:var(--cu-accent);stroke-width:.8}.cu-dep-n .cu-elabel text{font-size:10px;text-anchor:middle;fill:var(--cu-ink)}
+.cu-dep-n .cu-dlink.cu-on .cu-elabel text{fill:var(--cu-accent);font-weight:700}
+
+/* related: one thing and what it is related to */
+.cu-related .cu-rlm rect{fill:var(--cu-surface,#fff);stroke:var(--cu-c,var(--cu-line));stroke-width:1.3}
+.cu-related .cu-rlm text{text-anchor:middle;font-size:11.5px}
+.cu-related .cu-rlc rect{stroke-width:2.2}.cu-related .cu-rlc text{font-weight:700;font-size:12.5px}
+.cu-related .cu-rle .cu-trl{stroke:var(--cu-line);stroke-width:1.2}
+.cu-related .cu-rlb{fill:var(--cu-bg,#fff);stroke:none}.cu-related .cu-rlt{text-anchor:middle;font-size:10px;fill:var(--cu-muted,#6b7280)}
+.cu-related .cu-rle.cu-on .cu-trl{stroke:var(--cu-accent);stroke-width:2}.cu-related .cu-rle.cu-on .cu-rlt{fill:var(--cu-accent);font-weight:700}
+.cu-related .cu-rll{stroke-width:1.1}
+.cu-related .cu-now rect{fill:var(--cu-accent-soft)}
