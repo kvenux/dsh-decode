@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.1.0-preview.2
 
 - The mode is called "Decode" in the mode menu (it was "Decode 读懂代码"): dsh cannot translate a plugin's mode name, so the
   name now reads the same in English and Chinese; the description has both languages.

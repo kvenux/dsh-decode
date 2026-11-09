@@ -9,7 +9,7 @@ README 讲 Decode 为什么存在、怎么装。这里是完整的说明：读�
 - 要求 dsh 0.2.1-rc.5 或更新（npm 的 latest、next 都可以）。0.1.x 不能用：它没有右侧面板。装 0.2.x 的其他预发布版（如 0.2.3-rc.1）时 npm 可能报 peer 警告：npm 的版本范围不把别的版本号的预发布版算进去；dsh 自己的兼容检查算，插件照常加载。
 - 从 npm 装（预览版用 preview 标签）：`dsh plugin --profile web add dsh-decode@preview`
 - 从本机目录装（改了 `src/client/` 要先 `npm run build`；之后刷新页面或重启 dsh web 就生效）：`dsh plugin --profile web add C:/path/to/dsh-decode`
-- 从打包文件装：在本仓库运行 `npm pack`，然后 `dsh plugin --profile web add C:/path/to/dsh-decode-0.1.0-preview.1.tgz`
+- 从打包文件装：在本仓库运行 `npm pack`，然后 `dsh plugin --profile web add C:/path/to/dsh-decode-0.1.0-preview.2.tgz`
 - `dsh plugin add` 会把插件加进 profile 的 bundles。用新的 profile 名时，dsh 只放 `@deepseek-ai/dsh-base`，要在 profile 的 `package.json` 里手动加 `@deepseek-ai/dsh-web-app`（放在插件前面）。
 - 重启 dsh web。
 
