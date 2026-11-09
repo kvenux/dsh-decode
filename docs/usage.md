@@ -33,7 +33,7 @@ Good questions: flows across modules, state changes, the impact of a change, how
 
 - A question usually takes 1.5–4 minutes (DeepSeek-V4.1-Flash, reasoning high), about 1.9 times the standard mode. Most of the extra time goes into the paragraphs and the diagram. If looking takes more than 3 minutes, the plugin tells the model to finish with the evidence it has, and the card says so.
 - Input is about 0.4M–2M tokens per question (shown in the session footer; over 90% cache hits), output about 20–35K tokens (measured at reasoning max).
-- At reasoning low on a private repository (5 questions), Decode used 4.10M tokens in all against 7.13M for the standard mode, in 362 s against 390 s.
+- At reasoning low on the deepseek-harness repository (5 questions, 25 answers per mode), Decode used 696K tokens and 116 s per question, against 655K and 61 s for the standard mode.
 
 ## Tools and safety
 
