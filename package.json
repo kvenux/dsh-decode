@@ -1,6 +1,6 @@
 {
   "name": "dsh-decode",
-  "version": "0.1.0-preview.2",
+  "version": "0.1.0-preview.3",
   "description": "Decode: code-repository Q&A for DeepSeek Harness, with cw-uml interactive diagrams, code evidence per paragraph and the files it used. No setup.",
   "type": "module",
   "main": "./src/web.js",

@@ -9,7 +9,7 @@ The README says why Decode exists and how to install it. This page has the full 
 - Needs dsh 0.2.1-rc.5 or newer (npm `latest` and `next` both work). 0.1.x does not work: it has no right panel. With other 0.2.x prereleases (such as 0.2.3-rc.1) npm can give a peer warning: npm's version ranges do not include prereleases of other version numbers. dsh's own compatibility check does, and the plugin loads.
 - From npm (the preview uses the `preview` tag): `dsh plugin --profile web add dsh-decode@preview`
 - From a local folder (after a change to `src/client/`, run `npm run build` first; then refresh the page or restart dsh web): `dsh plugin --profile web add C:/path/to/dsh-decode`
-- From a packed file: run `npm pack` in this repository, then `dsh plugin --profile web add C:/path/to/dsh-decode-0.1.0-preview.2.tgz`
+- From a packed file: run `npm pack` in this repository, then `dsh plugin --profile web add C:/path/to/dsh-decode-0.1.0-preview.3.tgz`
 - `dsh plugin add` adds the plugin to the profile's bundles. With a new profile name, dsh puts only `@deepseek-ai/dsh-base` there: add `@deepseek-ai/dsh-web-app` to the profile's `package.json` yourself (before the plugin).
 - Restart dsh web.
 - In the dsh web or desktop app: Plugins → Add plugin → `dsh-decode@preview` → Install. To upgrade, remove the plugin on its detail page and add it again.

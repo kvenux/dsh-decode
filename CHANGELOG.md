@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-preview.3
+
+- Diagram layout: activity diagrams split decision branches from the diamond's corners and join edges into the same
+  step before they enter it; text in boxes wraps into lines of even width without breaking words.
+- Component and class diagrams: an edge going up to the row above turns once and enters the box from the side, and
+  the horizontal segments in each gap are ordered to cross as little as possible.
+- Fixes found by reviewing real answers: sequence fragment labels no longer overlap, nested deployment links no longer
+  cross titles, and an inheritance label sits on its shortest branch.
+
 ## 0.1.0-preview.2
 
 - The mode is called "Decode" in the mode menu (it was "Decode 读懂代码"): dsh cannot translate a plugin's mode name, so the
