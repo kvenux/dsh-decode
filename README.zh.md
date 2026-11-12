@@ -34,9 +34,7 @@ Yes 工程师。GoGo 工程师。**认知投降，有了职位名称。**
 ![license](https://img.shields.io/badge/license-MIT-22c55e)
 ![写文件工具](https://img.shields.io/badge/%E5%86%99%E6%96%87%E4%BB%B6%E5%B7%A5%E5%85%B7-%E6%97%A0-64748b)
 
-[![观看 26 秒视频：Are you a Yes Engineer?](docs/assets/decode-intro.png)](docs/assets/decode-intro.mp4)
-
-<sub>点击图片观看 26 秒视频（有声音）。</sub>
+<img width="1280" height="720" alt="decode-intro" src="https://github.com/user-attachments/assets/3fff3b7a-d6c8-4680-98d1-2e32b53a3c9c" />
 
 ![Decode 在 deepseek-harness 仓库上回答问题：段落切换，图跟着走，引文展开到代码](docs/assets/decode.gif)
 
