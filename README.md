@@ -34,9 +34,7 @@ Yes Engineer. GoGo Engineer. **Cognitive surrender, with a job title.**
 ![license](https://img.shields.io/badge/license-MIT-22c55e)
 ![file write tools](https://img.shields.io/badge/file%20write%20tools-none-64748b)
 
-[![Watch the 26-second video: Are you a Yes Engineer?](docs/assets/decode-intro.png)](docs/assets/decode-intro.mp4)
-
-<sub>Click the picture to watch the 26-second video, with sound.</sub>
+https://github.com/user-attachments/assets/cd28159f-6df6-4d27-8112-482d2d9be9ab
 
 ![Decode answers a question about the deepseek-harness repository: step through the paragraphs, the diagram follows, a quote opens to its code](docs/assets/decode.gif)
 
