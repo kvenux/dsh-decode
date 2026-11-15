@@ -34,7 +34,7 @@ Yes 工程师。GoGo 工程师。**认知投降，有了职位名称。**
 ![license](https://img.shields.io/badge/license-MIT-22c55e)
 ![写文件工具](https://img.shields.io/badge/%E5%86%99%E6%96%87%E4%BB%B6%E5%B7%A5%E5%85%B7-%E6%97%A0-64748b)
 
-<img width="1280" height="720" alt="decode-intro" src="https://github.com/user-attachments/assets/3fff3b7a-d6c8-4680-98d1-2e32b53a3c9c" />
+https://github.com/user-attachments/assets/cd28159f-6df6-4d27-8112-482d2d9be9ab
 
 ![Decode 在 deepseek-harness 仓库上回答问题：段落切换，图跟着走，引文展开到代码](docs/assets/decode.gif)
 
@@ -83,17 +83,23 @@ dsh plugin --profile web add dsh-decode@preview
 
 ## 看它回答
 
-问题：**Before the agent runs a command or changes a file, which permission checks and approvals does it go through?**（智能体执行一条命令或修改文件之前，要经过哪些权限检查和审批？）
-
-![权限检查：结论、编号段落、每段的引文；右侧是跟着段落走的图和引用的文件](docs/assets/permissions.png)
-
 问题：**Which processes take part when you run dsh web, and how do they communicate?**（运行 dsh web 时有哪些进程参与？它们之间怎么通信？）
 
-![部署图：进程和通信方式；下方是本段引用的文件](docs/assets/processes.png)
+![回答顶部是引文统计：15 条引文有 14 条在文件里找到，1 条没有来源；右侧的部署图高亮第 2 段讲的部分](docs/assets/shot-overview.png)
+
+回答顶部是引文统计：15 条引文有 14 条在文件里找到，没有来源的那 1 条标在它所在的段落下面。右侧的部署图点亮第 2 段讲到的部分。
+
+问题：**Before the agent runs a command or changes a file, which permission checks and approvals does it go through?**（智能体执行一条命令或修改文件之前，要经过哪些权限检查和审批？）
+
+![时序图单独占一个标签页：第 2 段的几步高亮，opt 块是只有检查要求询问时才走的路径](docs/assets/shot-diagram.png)
+
+时序图单独占一个标签页。第 2 段的几步高亮；`opt` 块是只有检查要求询问时才走的路径。
 
 一处引文展开后，就是它依据的那几行代码：
 
-![展开一处引文：文件、行号和代码](docs/assets/evidence.png)
+![在 pipeline.ts 里展开一处引文；下面另一条证据标着 Inferred（推断）](docs/assets/shot-evidence.png)
+
+下面另一条证据标着 **Inferred**（推断）：模型在这里没有抄代码，页面直接标了出来。
 
 ## 为什么 yes 会变成条件反射
 

@@ -83,17 +83,23 @@ It even warns you. This line is always at the top of the card:
 
 ## See it answer
 
-Question: **Before the agent runs a command or changes a file, which permission checks and approvals does it go through?**
-
-![Permission checks: the conclusion, numbered paragraphs, the quotes per paragraph; on the right the diagram that follows the paragraph, and the files cited](docs/assets/permissions.png)
-
 Question: **Which processes take part when you run dsh web, and how do they communicate?**
 
-![A deployment diagram: the processes and how they talk; below it, the files this paragraph cites](docs/assets/processes.png)
+![The answer with its quote count on top: 14 of 15 quotes found in the files, 1 without source; on the right the deployment diagram highlights what paragraph 2 is about](docs/assets/shot-overview.png)
+
+Above the answer, the count: 14 of 15 quotes were found in the files, and the one without a source is marked under its paragraph. On the right, the deployment diagram lights up what paragraph 2 talks about.
+
+Question: **Before the agent runs a command or changes a file, which permission checks and approvals does it go through?**
+
+![A sequence diagram on its own tab: the steps of paragraph 2 are lit, the opt blocks hold the paths taken only when a check asks](docs/assets/shot-diagram.png)
+
+The sequence diagram on its own tab. The steps of paragraph 2 are lit; the `opt` blocks are the paths taken only when a check asks.
 
 Open a quote, and you see the lines of code it rests on:
 
-![One quote opened: the file, the lines and the code](docs/assets/evidence.png)
+![One quote opened to its lines in pipeline.ts; below it, a second piece of evidence marked Inferred](docs/assets/shot-evidence.png)
+
+Below it, a second piece of evidence is marked **Inferred**: the model quoted no code there, and the page says so.
 
 ## Why yes becomes a reflex
 
