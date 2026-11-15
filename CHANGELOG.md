@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-preview.4
+
+- No change to the plugin's code. The npm page gets the new README: three new screenshots (the quote count above an
+  answer, a sequence diagram on its own tab, a quote opened next to evidence marked Inferred), each with a line saying
+  what it shows. The intro video plays from GitHub; the Chinese README now links the video, not its cover picture.
+- `screenshots.json` lists the screenshots that plugin stores show on Decode's page.
+
 ## 0.1.0-preview.3
 
 - Diagram layout: activity diagrams split decision branches from the diamond's corners and join edges into the same
